@@ -22,28 +22,31 @@
     })
   }
 </script>
-
-<Header company="Logo" platformName="" bind:isSideNavOpen>
-  {#if $connected}
-    {#if running}
-    <Button on:click={stopMic} kind="danger">Stop</Button>  
+<div class="h-[10vh]">
+  <div class=" w-full flex items-center gap-x-8 ml-3">
+    <div class="text-black font-bold text-lg py-2">
+      HealthCopilot
+    </div>
+    {#if $connected}
+      {#if running}
+      <button on:click={stopMic} class="bg-red-600 text-white font-bold px-4 py-2">Stop</button>  
+      {:else}
+      <Button on:click={startMic} class="bg-blue-600 text-white font-bold px-4 py-2">Start</Button>  
+      {/if}
     {:else}
-    <Button on:click={startMic}>Start</Button>  
+    <button on:click={stopMic} class="bg-gray-600 text-white font-bold px-4 py-2">Not connected</button>  
     {/if}
-  {:else}
-  <Button on:click={stopMic} disabled>Not connected</Button>  
-  {/if}
-  
-  <HeaderNav>
-    <HeaderNavItem
-      isSelected={$page.url.pathname === "/doctor" ? true : false}
-      href="/doctor"
-      text="Doctor companion"
-    />
-    <HeaderNavItem
-      isSelected={$page.url.pathname === "/patient" ? true : false}
-      href="/patient"
-      text="Patient companion"
-    />
-  </HeaderNav>
-</Header>
+    
+    <div >
+      <a href="/doctor" class="decoration-none text-black px-4">
+        DoctorAI
+      </a>
+      <!-- <HeaderNavItem
+        isSelected={$page.url.pathname === "/patient" ? true : false}
+        href="/patient"
+        text="Patient companion"
+      /> -->
+      </div>
+    </div>
+</div>
+

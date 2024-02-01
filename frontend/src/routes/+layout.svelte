@@ -7,7 +7,7 @@
 </script>
 
 <Nav />
-<div class="mt-15">
+<div class="h-[90vh] w-screen flex justify-center items-center">
   <slot />
 </div>
 

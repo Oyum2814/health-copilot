@@ -25,29 +25,29 @@
 
 </script>
 
-<div class="w-full flex flex-col justify-start">
-  <Tile class="block">
+<div class="w-full h-full flex  flex-col justify-start bg-white ">
+  <Tile class="block rounded-t-[9px] overflow-hidden bg-black">
     <p class="text-lg">Doctors consultation notes</p>
   </Tile>
   <TextArea
     hideLabel
     placeholder={`Record any notes not captured in the transcript here. You can then use "Generate" to autogenerate a full consultation summary.`}
-    class="mt-2 block"
+    class="block bg-white border-2 border-black text-black"
     bind:value
     on:change={setSummary}
-    rows={30}
+    rows={20}
   />
-  <ButtonSet class="flex justify-end mt-2">
+  <ButtonSet class="flex w-full justify-evenly mb-20">
     <!-- <Button
       on:click={() => {
         location.reload();
       }}
       kind="danger-ghost">Reset</Button
     > -->
-    <Button icon={DiagramReference} class="block" kind="secondary" on:click={generate}
+    <Button icon={DiagramReference} class="block bg-blue-600 hover:bg-blue-800 font-bold" kind="secondary" on:click={generate}
       >Generate</Button
     >
-    <Button on:click={setSummary} class="block" icon={ArrowRight}>Save</Button>
+    <Button on:click={setSummary} class="block font-bold" icon={ArrowRight}>Save</Button>
   </ButtonSet>
 
   <div />
