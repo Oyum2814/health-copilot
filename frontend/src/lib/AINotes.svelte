@@ -29,8 +29,8 @@
     <Tile class="bg-black">
       <p>Diagnosis Report (Potential)</p>
     </Tile>
-    <div class="h-full m-2">
-      <Content class="text-base prose text-lg" >
+    <div class="h-full m-2 overflow-y-scroll">
+      <Content class="text-base prose text-lg text-black" >
         <SvelteMarkdown source={ddx} />
       </Content>
     </div>
@@ -39,8 +39,8 @@
     <Tile class="bg-black">
       <p> Questions to be asked</p>
     </Tile>
-    <div class="h-full m-2">
-      <Content class="text-base prose text-lg">
+    <div class="h-full m-2 overflow-y-scroll">
+      <Content class="text-base prose text-lg text-black">
         <SvelteMarkdown source={qa} />
       </Content>
     </div>

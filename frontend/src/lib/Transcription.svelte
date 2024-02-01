@@ -28,7 +28,7 @@
     /> -->
   </Tile>
 
-  <div class="overflow-y-scroll h-full bg-white p-2">
+  <div class="overflow-y-scroll h-full bg-white p-2 text-black">
     {#if live}
       <SvelteMarkdown source={live} />
     {:else}

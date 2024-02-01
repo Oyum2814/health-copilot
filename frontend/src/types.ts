@@ -1,7 +1,7 @@
 import { env } from "$env/dynamic/public";
 import { io } from "socket.io-client";
 import { readable } from 'svelte/store'
-export const DoctorSocket = io(`http://localhost:8086/`, {autoConnect: false});
+export const DoctorSocket = io(`http://localhost:8092/`, {autoConnect: false});
 
 export interface TranscriptMessage{
     speaker: number | string;

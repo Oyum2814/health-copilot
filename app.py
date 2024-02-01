@@ -1,6 +1,6 @@
 import socketio
 from flask import Flask
-from llm import patient_instructor, clinical_note_writer, cds_helper_ddx, cds_helper_qa, gpt4_0
+from llm import patient_instructor, clinical_note_writer, cds_helper_ddx, cds_helper_qa
 from socketcallback import SocketIOCallback
 from state import state_store
 from text_to_speeh_google import synthesize
@@ -163,7 +163,7 @@ def send_patient_audio_message(content):
 
 
 def start_socketio_server():
-    app.run('0.0.0.0', 8086)
+    app.run('0.0.0.0', 8092)
 
 
 ai_note_set = 0

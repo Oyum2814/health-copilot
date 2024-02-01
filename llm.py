@@ -4,24 +4,26 @@ from langchain.prompts.prompt import PromptTemplate
 from langchain.chains import LLMChain, ConversationChain
 from state import state_store
 from dotenv import load_dotenv
+from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv()
 
 
 
-#openai_api_key="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"
-gpt3 = ChatOpenAI(
+openai_api_key="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"
+
+openLLM = ChatOpenAI(
+    openai_api_key="tune-ba27420a-2291-48c8-9a8c-66064023e7a31706782866",
+    openai_api_base="https://chat.nbox.ai/api/",
+    model_name="goliath-120b-8k-gptq"
+)
+
+llm_00 = ChatOpenAI(model='gpt-3.5-turbo-1106', temperature=0.2, streaming=True, verbose=True)
+llm_01 = ChatOpenAI(
     model='gpt-3.5-turbo-1106',
     temperature=0.2,
     streaming=True,
     verbose=True)
-
-
-gpt4_0 = ChatOpenAI(openai_api_key="tune-23c8b543-df46-4241-b067-a4d3bb88e2771706776272",
-   openai_api_base="https://chat.nbox.ai/api/",
-   model_name="nous-hermes-2-mixtral-8x7b-dpo")
-gpt4 = ChatOpenAI(model='gpt-3.5-turbo-1106', temperature=0.2, streaming=True, verbose=True)
-
 clinical_note_writer_template = PromptTemplate(
     input_variables=["transcript", "input"],
     template=
@@ -86,6 +88,20 @@ The consultation snippets are as follows:
 Questions to Ask:
 """)
 
+'''
+patient_instructions_template = ChatPromptTemplate.from_template(
+    """As a medical chatbot named Paco, your task is to answer patient questions about their prescriptions. You should provide complete, scientifically-grounded, and actionable answers to queries, based on the provided recent clinical note.
+Remember to introduce yourself as Paco only at the start of the conversation. You can communicate fluently in the patient's language of choice, such as English and Hindi. If the patient asks a question unrelated to the diagnosis or medications in the clinical note, your response should be, 'I cannot answer this question.'
+
+### Recent Prescription
+{doctor_summary}
+
+Let's begin the conversation:
+{history}
+Patient: {input}
+Paco:""")
+'''
+
 patient_instructions_template = PromptTemplate(
     input_variables=["history", "input", "doctor_summary"],
     template=
@@ -100,14 +116,33 @@ Let's begin the conversation:
 Patient: {input}
 Paco:""")
 
-cds_helper = LLMChain(llm=gpt3, prompt=cds_helper, verbose=True)
 
-cds_helper_ddx = LLMChain(llm=gpt4, prompt=cds_helper_ddx_prompt, verbose=True)
-cds_helper_qa = LLMChain(llm=gpt4, prompt=cds_helper_qa_prompt, verbose=True)
+cds_helper = LLMChain(llm=llm_01, prompt=cds_helper, verbose=True)
 
-clinical_note_writer = LLMChain(llm=gpt4,
+cds_helper_ddx = LLMChain(llm=llm_00, prompt=cds_helper_ddx_prompt, verbose=True)
+cds_helper_qa = LLMChain(llm=llm_00, prompt=cds_helper_qa_prompt, verbose=True)
+
+clinical_note_writer = LLMChain(llm=llm_00,
                                 prompt=clinical_note_writer_template,
                                 verbose=True)
-patient_instructor = LLMChain(llm=gpt4,
+
+patient_instructor = LLMChain(llm=llm_00,
                               prompt=patient_instructions_template,
                               verbose=True)
+
+
+'''
+patient_instruct_LLM_prompt = ChatPromptTemplate.from_template("""As a medical chatbot named Paco, your task is to answer patient questions about their prescriptions. You should provide complete, scientifically-grounded, and actionable answers to queries, based on the provided recent clinical note.
+Remember to introduce yourself as Paco only at the start of the conversation. You can communicate fluently in the patient's language of choice, such as English and Hindi. If the patient asks a question unrelated to the diagnosis or medications in the clinical note, your response should be, 'I cannot answer this question.'
+
+### Recent Prescription
+{doctor_summary}
+
+Let's begin the conversation:
+{history}
+Patient: {input}
+Paco:"""
+)
+
+patient_instructor_LLM = LLMChain(llm=openLLM, prompt = patient_instruct_LLM_prompt, verbose = True)
+'''
