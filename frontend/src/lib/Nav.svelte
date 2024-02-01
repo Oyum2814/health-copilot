@@ -41,12 +41,10 @@
       <a href="/doctor" class="decoration-none text-black px-4">
         DoctorAI
       </a>
-      <!-- <HeaderNavItem
-        isSelected={$page.url.pathname === "/patient" ? true : false}
-        href="/patient"
-        text="Patient companion"
-      /> -->
-      </div>
+      <a href="/patient" class="decoration-none text-black px-4">
+        PatientAI
+      </a>
+    </div>
     </div>
 </div>
 

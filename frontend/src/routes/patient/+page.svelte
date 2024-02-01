@@ -7,7 +7,8 @@
     TextInputSkeleton,
   } from "carbon-components-svelte";
   import SendFilled from "carbon-icons-svelte/lib/SendFilled.svelte";
-  import Monster from "carbon-icons-svelte/lib/Monster.svelte";
+  import ReminderMedical from "carbon-icons-svelte/lib/ReminderMedical.svelte";
+  import UserFilled from "carbon-icons-svelte/lib/UserFilled.svelte";
   import { DoctorSocket } from "../../types";
   import { onDestroy } from "svelte";
   import { MicrophoneFilled } from "carbon-icons-svelte";
@@ -24,7 +25,7 @@
   }[] = [
     {
       message:
-        "Hello I'm Paco, your medical knowledge assistant ask me any questions about your prescription or your condition",
+        "Welcome to PatientAI, your medical knowledge assistant ask me any questions about your prescription or your condition",
       type: "bot",
     },
   ];
@@ -95,16 +96,21 @@
   });
 </script>
 
-<div class="h-[93vh] flex flex-col bg-repeat bg-x relative">
-  <div class="flex flex-col gap-y-3 mb-22 lg:w-[60%] mx-auto">
+<div class="h-[85vh] w-[80vw] bg-white  flex flex-col  bg-repeat bg-x relative">
+  <h2 class="w-full text-center mb-6 text-black font-bold">PatientAI</h2>
+  <div class="flex flex-col gap-y-3 mb-22 lg:w-[60%] mx-auto h-[70vh] overflow-y-scroll">
     {#each x as y}
       <div
         class="flex {y.type === 'patient' ? 'flex-row-reverse' : 'flex-row'}"
       >
         {#if y.type !== "patient"}
-          <div class="rounded-full bg-dark-400">
-            <Monster size={32} class="block m-auto" />
-          </div>
+        <div class="rounded-full bg-dark-400 my-auto mr-2">
+          <ReminderMedical size={32} class="block m-auto p-2 "/>
+        </div>
+        {:else}
+        <div class="rounded-full  my-auto ml-2">
+          <UserFilled size={32} class="block m-auto text-black "/>
+        </div>
         {/if}
         <Tile
           class="w-[60%] rounded-md shadow-sm {y.type === 'patient'
@@ -122,7 +128,7 @@
     {/each}
   </div>
 
-  <div class="flex absolute bottom-1 w-full px-6 py-3 bg-dark-600">
+  <div class="flex absolute bottom-1 w-full px-6 py-3  bg-black rounded-xl">
     <!-- <Button
       type="submit"
       on:click={toggleRecording}
@@ -130,9 +136,10 @@
       icon={MicrophoneFilled}
       size="xl"
     /> -->
-    <Form on:submit={postMessage} class=" w-full flex">
+    <Form on:submit={postMessage} class=" w-full flex bg-black rounded-full border-1 ">
       {#if !streamingMedia}
         <TextInput
+        class="bg-white text-black"
           size="xl"
           hideLabel
           labelText="User name"
@@ -149,7 +156,5 @@
 </div>
 
 <style>
-  .bg-x {
-    background-image: url("/bg.svg");
-  }
+  
 </style>
