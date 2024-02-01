@@ -37,7 +37,7 @@
     on:change={setSummary}
     rows={20}
   />
-  <ButtonSet class="flex w-full justify-evenly mb-20">
+  <ButtonSet class="flex flex-col gap-y-4 w-full justify-center items-center mb-20">
     <!-- <Button
       on:click={() => {
         location.reload();

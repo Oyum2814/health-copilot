@@ -24,9 +24,9 @@
 </script>
 <div class="h-[10vh]">
   <div class=" w-full flex items-center gap-x-8 ml-3">
-    <div class="text-black font-bold text-lg py-2">
+    <a href="/" class="text-black font-bold text-lg py-2 decoration-none cursor-pointer">
       HealthCopilot
-    </div>
+    </a>
     {#if $connected}
       {#if running}
       <button on:click={stopMic} class="bg-red-600 text-white font-bold px-4 py-2">Stop</button>  
