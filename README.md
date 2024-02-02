@@ -36,8 +36,7 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 - 2. Realtime Speech to Text Conversion.
 - 3. Works in multiple verbal languages (98+)
 - 4. Assistive Tool for Doctors 
-
-### 5. Provides presciption/medication related informations to users
+- 5. Provides presciption/medication related informations to users
 
 ## Authors -
 <div align="left"> 
