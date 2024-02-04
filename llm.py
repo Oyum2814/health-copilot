@@ -10,7 +10,7 @@ load_dotenv()
 
 
 
-openai_api_key="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"
+openai_api_key=""
 
 openLLM = ChatOpenAI(
     openai_api_key="tune-ba27420a-2291-48c8-9a8c-66064023e7a31706782866",
